@@ -3,30 +3,10 @@ import { formattedData } from '../../utils';
 import './Table.css'; 
 
 const DynamicTable = ({ data, itemData }) => {
-
-    // data = data.map((d) => [{...d, action: ''}])
-    
-    //-------------------------------------------------------------------------------
-    const array1 = data.filter((d) => d.IsHeader === 'Y');
-    const array2 = data.filter((d) => d.IsHeader === 'N');
-
-    console.log('arra1arra2',array1.map((d) => d.Name), array2.map((d) => d.Name))
-
-    const result = array1.map((d) => d.Name).reduce((acc, key, index) => {
-        const value = array2.map((d) => d.Name)[index];
-        acc[key] = value;
-        // acc['delete'] = '';
-        return acc;
-    }, {});
-
-    const finalResult = [result];
-    console.log('finalResult',finalResult);
-    //--------------------------------------------------------------------------------
-
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
-        setTableData(finalResult);
+        setTableData(formattedData(data));
     }, []);
 
   const renderTableHeader = () => {
@@ -60,21 +40,20 @@ const DynamicTable = ({ data, itemData }) => {
   };
 
   const addRow  = () => {
-      console.log('Last data',tableData[tableData.length-1]);
-      console.log('adding row');
-
       setTableData([...tableData, {...tableData[tableData.length-1]}])
   }
 
   return (
     <div className="table-container">
-      <table className="table">
-        <thead>
-          <tr>{renderTableHeader()}</tr>
-        </thead>
-        <tbody>{renderTableRows()}</tbody>
-        <button onClick={() => addRow()}>+Add</button>
-      </table>
+        {tableData.length > 0 &&
+        <table className="table">
+            <thead>
+            <tr>{renderTableHeader()}</tr>
+            </thead>
+            <tbody>{renderTableRows()}</tbody>
+            <button onClick={() => addRow()}>+Add</button>
+        </table>
+      }
     </div>
   );
 };

@@ -10,14 +10,8 @@ function App() {
 
   const sortedCategory = sortBy(categories, 'DisplayOrder');
 
-  console.log('sortedCategory', sortedCategory);
-
   return (
-    <div className="App">
-      {/* {Category.map(() => (
-        <Table data={sortedCategory}/>
-      ))}  */}
-
+    <div className="App">     
       {sortedCategory.map((category) => (
         <div className='marginbtm-20'>
           <div>{category.CategoryName}</div>
