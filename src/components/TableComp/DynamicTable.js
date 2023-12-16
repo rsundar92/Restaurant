@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { formattedData } from '../../utils';
 import './Table.css'; 
 
-const DynamicTable = ({ data, itemData }) => {
+const DynamicTable = ({ data }) => {
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
@@ -30,9 +30,7 @@ const DynamicTable = ({ data, itemData }) => {
                 <button onClick={() => deleteRow(index)}>{ 'Delete'}</button>}
           </td>
           {Object.entries(row).map(([key, value], index) => (
-            <>
-              <td key={key}><>{value}</></td>
-            </>
+              <td key={index}><>{value}</></td>
           ))}
         </tr>
       );

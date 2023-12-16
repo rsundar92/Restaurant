@@ -41,3 +41,9 @@
 .marginbtm-20 {
   margin-bottom: 40px;
 }
+
+.cat-name {
+  margin: 10px 0px;
+  font-size: 14px;
+  font-weight: bold;
+}

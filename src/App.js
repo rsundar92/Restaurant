@@ -14,7 +14,7 @@ function App() {
     <div className="App">     
       {sortedCategory.map((category) => (
         <div className='marginbtm-20'>
-          <div>{category.CategoryName}</div>
+          <div className='cat-name'>{category.CategoryName}</div>
           {!category.IsCollection 
             ? <Table data={sortBy(filterItemsByCategory(items, category.CategoryID), 'RowWiseDisplayOrder')} itemData={ItemData} /> 
             : <DynamicTable data={sortBy(filterItemsByCategory(items, category.CategoryID))} itemData={ItemData} />}

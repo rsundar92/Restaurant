@@ -43,7 +43,7 @@ const Table = ({ data, itemData }) => {
     <div className="table-container">
       <table className="table">
         <thead>
-          <tr>{renderTableHeader()}</tr>
+          {/* <tr>{renderTableHeader()}</tr> */}
         </thead>
         <tbody>{renderTableRows()}</tbody>
       </table>

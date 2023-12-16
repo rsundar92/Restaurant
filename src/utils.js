@@ -14,15 +14,13 @@ export const filterItemDataByDropdownId = (data, dropDownID) => {
 }
 
 export const formattedData = (data) => {
-    const array1 = data.filter((d) => d.IsHeader === 'Y');
-    const array2 = data.filter((d) => d.IsHeader === 'N');
-
-    const result = array1.map((d) => d.Name).reduce((acc, key, index) => {
-        const value = array2.map((d) => d.Name)[index];
+   const partitionedArr =  _.partition(data, (o) => o.IsHeader === 'Y');
+   
+    const result = partitionedArr[0].map((d) => d.Name).reduce((acc, key, index) => {
+        const value = partitionedArr[1].map((d) => d.Name)[index];
         acc[key] = value;
         return acc;
     }, {});
 
-    const finalResult = [result];
-    return finalResult;
+    return [result];
 }
