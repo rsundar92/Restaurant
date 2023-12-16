@@ -3,8 +3,10 @@ import { formattedData } from '../../utils';
 import './Table.css'; 
 
 const DynamicTable = ({ data, itemData }) => {
+
+    // data = data.map((d) => [{...d, action: ''}])
     
-    //--------------------------
+    //-------------------------------------------------------------------------------
     const array1 = data.filter((d) => d.IsHeader === 'Y');
     const array2 = data.filter((d) => d.IsHeader === 'N');
 
@@ -19,7 +21,7 @@ const DynamicTable = ({ data, itemData }) => {
 
     const finalResult = [result];
     console.log('finalResult',finalResult);
-    //--------------------------
+    //--------------------------------------------------------------------------------
 
     const [tableData, setTableData] = useState([]);
 
@@ -33,7 +35,7 @@ const DynamicTable = ({ data, itemData }) => {
     
     const header = data.map((d) => d.Name)
 
-    return header.map((key, index) => <th key={index}>{key.toUpperCase()}</th> );
+    return ['', ...header].map((key, index) => <th key={index}>{key.toUpperCase()}</th> );
   };
 
   const deleteRow = (index) => {
@@ -44,8 +46,9 @@ const DynamicTable = ({ data, itemData }) => {
     return tableData.map((row, index) => {
       return (
         <tr key={index}>
-
-          <td><button onClick={() => deleteRow(index)}>Delete {index}</button></td>
+          <td>{index === 0 ? '' :
+                <button onClick={() => deleteRow(index)}>{ 'Delete'}</button>}
+          </td>
           {Object.entries(row).map(([key, value], index) => (
             <>
               <td key={key}><>{value}</></td>
