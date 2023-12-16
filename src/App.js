@@ -1,23 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import Table from './components/TableComp';
+import Mock from './mock.json';
+import { filterItemsByCategory, sortBy } from './utils';
+import DynamicTable from './components/TableComp/DynamicTable';
 
 function App() {
+  const { Category: categories, Item:items, ItemData, InputID  } = Mock;
+
+  const sortedCategory = sortBy(categories, 'DisplayOrder');
+
+  console.log('sortedCategory', sortedCategory);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* {Category.map(() => (
+        <Table data={sortedCategory}/>
+      ))}  */}
+
+      {sortedCategory.map((category) => (
+        <div className='marginbtm-20'>
+          <div>{category.CategoryName}</div>
+          {!category.IsCollection 
+            ? <Table data={sortBy(filterItemsByCategory(items, category.CategoryID), 'RowWiseDisplayOrder')} itemData={ItemData} /> 
+            : <DynamicTable data={sortBy(filterItemsByCategory(items, category.CategoryID))} itemData={ItemData} />}
+          
+        </div>
+      ))} 
     </div>
   );
 }
